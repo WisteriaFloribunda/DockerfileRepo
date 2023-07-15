@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  tunnel:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tunnel
+    volumes:
+      - ./dir/:/home/workspace
+      - vscode:/root
+    working_dir: /home/workspace
+    network_mode: "host"
+    restart: always
+volumes:
+  vscode:
