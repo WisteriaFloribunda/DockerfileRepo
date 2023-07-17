@@ -15,7 +15,10 @@ RUN chown -R root:root vpnserver && \
     chmod 700 vpnserver/vpnserver
 
 FROM ubuntu:latest
-
+RUN apt update && \
+    apt install iptables iptables-persistent -y && \
+    apt clean && \
+    rm -rf /var/lib/apt/lists/*
 WORKDIR /vpnserver
 COPY --from=0 /temp/vpnserver /vpnserver/
 EXPOSE 443/tcp 992/tcp 1194/tcp 5555/tcp 1194/udp 500/udp 4500/udp
